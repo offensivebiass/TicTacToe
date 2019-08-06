@@ -6,7 +6,7 @@ class TicTacToe extends HTMLElement {
         this.gameSize = 3
         this.showPromptInit()
         this.drawGame()
-        
+
         this.array = new Array(this.gameSize)
         for (var i = 0; i < this.array.length; i++) {
             this.array[i] = new Array(this.gameSize)
@@ -51,19 +51,9 @@ class TicTacToe extends HTMLElement {
     }
 
     chekGame() {
+        for (let i = 0; i < this.gameSize; i++) {
 
-        let variableX = 0
-        for (let i = 0; i < this.arrayCase; i++) {
-            if (this.arrayCase[i].innerHTML === 'x') {
-              variableX += 1
-            }
-            for (let j = 0; j < this.arrayCase; j++) {
-            }
-          }
-
-          if (variableX == this.amountOfSquaresDefault) {
-            alert('X WON')
-          }
+        }
     }
 
 }
