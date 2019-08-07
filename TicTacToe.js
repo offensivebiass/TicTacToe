@@ -6,12 +6,6 @@ class TicTacToe extends HTMLElement {
         this.gameSize = 3
         this.showPromptInit()
         this.drawGame()
-
-        this.array = new Array(this.gameSize)
-        for (var i = 0; i < this.array.length; i++) {
-            this.array[i] = new Array(this.gameSize)
-        }
-
     }
 
     showPromptInit() {
@@ -28,9 +22,10 @@ class TicTacToe extends HTMLElement {
     drawGame() {
         this.arrayCase = []
         for (var i = 0; i < this.gameSize; i++) {
+            this.arrayCase[i] = []
             for (var j = 0; j < this.gameSize; j++) {
                 var button = document.createElement('button')
-                this.arrayCase.push(button)
+                this.arrayCase[i].push(button)
                 button.addEventListener('click', this.play.bind(this))
                 this.shadow.appendChild(button)
             }
@@ -40,7 +35,6 @@ class TicTacToe extends HTMLElement {
     }
 
     play(event) {
-        console.log('event.target:', event.target, this)
         let input = prompt('¿Que valor deseas colocar?')
         if (input === 'x') {
             event.target.innerHTML = 'x'
@@ -51,8 +45,86 @@ class TicTacToe extends HTMLElement {
     }
 
     chekGame() {
+        let variableX = 0
+        let variableO = 0
+        //Validate Horizontal
+        for (let i = 0; i < this.gameSize; i++) {
+            for (let j = 0; j < this.gameSize; j++) {
+                if (this.arrayCase[i][j].innerHTML === 'x') {
+                    variableX += 1
+                    if (variableX == this.gameSize) {
+                        alert('Gano el jugador X')
+                    }
+                }
+                if (this.arrayCase[i][j].innerHTML === 'o') {
+                    variableO += 1
+                    if (variableO == this.gameSize) {
+                        alert('Gano el jugador O')
+                    }
+                }
+            }
+            variableO = 0
+            variableX = 0
+        }
+        //Validate Vertical
+        for (let j = 0; j < this.gameSize; j++) {
+            for (let i = 0; i < this.gameSize; i++) {
+                if (this.arrayCase[i][j].innerHTML === 'x') {
+                    variableX += 1
+                    if (variableX == this.gameSize) {
+                        alert('Gano el jugador X')
+                    }
+                }
+                if (this.arrayCase[i][j].innerHTML === 'o') {
+                    variableO += 1
+                    if (variableO == this.gameSize) {
+                        alert('Gano el jugador O')
+                    }
+                }
+            }
+            variableO = 0
+            variableX = 0
+        }
+        //Validate Diagonal
         for (let i = 0; i < this.gameSize; i++) {
 
+            if (this.arrayCase[i][i].innerHTML === 'x') {
+                variableX += 1
+                if (variableX == this.gameSize) {
+                    alert('Gano el jugador X')
+                }
+            }
+            if (this.arrayCase[i][i].innerHTML === 'o') {
+                variableO += 1
+                if (variableO == this.gameSize) {
+                    alert('Gano el jugador O')
+                }
+            }
+        }
+        variableO = 0
+        variableX = 0
+        //Validate Diagonal reversed
+        for (var k = 0; k <= this.gameSize - 1; k++) {
+            var i = k
+            var j = 0
+            while (i >= 0) {
+                if (this.arrayCase[i][j].innerHTML === 'x') {
+                    variableX += 1
+                    if (variableX == this.gameSize) {
+                        alert('Gano el jugador X')
+                    }
+                }
+                if (this.arrayCase[i][j].innerHTML === 'o') {
+                    variableO += 1
+                    if (variableO == this.gameSize) {
+                        alert('Gano el jugador O')
+                    }
+                }
+                i += -1
+                j += 1
+            }
+            variableX = 0
+            variableO = 0
         }
     }
 
