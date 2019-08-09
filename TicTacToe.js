@@ -3,30 +3,35 @@ class TicTacToe extends HTMLElement {
     constructor() {
         super()
         this.shadow = this.attachShadow({ mode: 'open' })
-        this.gameSize = 3
-        this.drawGame()
-        this.turn = 0
-        this.player1 = null
-        this.player2 = null
+        this.init()
     }
-
-    /*showPromptInit() {
-        var doc = prompt('Ingresa el tamaño del juego',
-            '')
-        if (doc != null) {
-            this.gameSize = doc
-        }
-    }*/
 
     connectedCallback() {
     }
 
-    drawGame() {
+    init() {
+        this.gameSize = 3
+        this.turn = 0
+        this.player1 = null
+        this.player2 = null
+        let link = document.createElement('link')
+        link.setAttribute('rel', 'stylesheet')
+        link.setAttribute('type', 'text/css')
+        link.setAttribute('href', './style.css')
+        this.shadow.appendChild(link)
+        this.showPromptInit()
+        this.drawGame()
+    }
+
+    showPromptInit() {
         var doc = prompt('Ingresa el tamaño del juego',
             '')
         if (doc != null) {
             this.gameSize = doc
         }
+    }
+
+    drawGame() {
         this.arrayCase = []
         for (var i = 0; i < this.gameSize; i++) {
             this.arrayCase[i] = []
@@ -55,12 +60,6 @@ class TicTacToe extends HTMLElement {
             event.target.innerHTML = this.player2
             this.turn = 0
         }
-        /*let input = prompt('Jugador uno, elige tu ficha') 
-        if (input === 'x') {
-            event.target.innerHTML = 'x'
-        } if (input === 'o') {
-            event.target.innerHTML = 'o'
-        }*/
         this.chekGame()
     }
 
@@ -74,14 +73,14 @@ class TicTacToe extends HTMLElement {
                     variableX += 1
                     if (variableX == this.gameSize) {
                         alert('Gano el jugador ' + this.player1)
-                        this.drawGame()
+                        this.init()
                     }
                 }
                 if (this.arrayCase[i][j].innerHTML === this.player2) {
                     variableO += 1
                     if (variableO == this.gameSize) {
                         alert('Gano el jugador ' + this.player2)
-                        this.drawGame()
+                        this.init()
                     }
                 }
             }
@@ -95,14 +94,14 @@ class TicTacToe extends HTMLElement {
                     variableX += 1
                     if (variableX == this.gameSize) {
                         alert('Gano el jugador ' + this.player1)
-                        this.drawGame()
+                        this.init()
                     }
                 }
                 if (this.arrayCase[i][j].innerHTML === this.player2) {
                     variableO += 1
                     if (variableO == this.gameSize) {
                         alert('Gano el jugador ' + this.player2)
-                        this.drawGame()
+                        this.init()
                     }
                 }
             }
@@ -116,14 +115,14 @@ class TicTacToe extends HTMLElement {
                 variableX += 1
                 if (variableX == this.gameSize) {
                     alert('Gano el jugador ' + this.player1)
-                    this.drawGame()
+                    this.init()
                 }
             }
             if (this.arrayCase[i][i].innerHTML === this.player2) {
                 variableO += 1
                 if (variableO == this.gameSize) {
                     alert('Gano el jugador ' + this.player2)
-                    this.drawGame()
+                    this.init()
                 }
             }
         }
@@ -138,14 +137,14 @@ class TicTacToe extends HTMLElement {
                     variableX += 1
                     if (variableX == this.gameSize) {
                         alert('Gano el jugador ' + this.player1)
-                        this.drawGame()
+                        this.init()
                     }
                 }
                 if (this.arrayCase[i][j].innerHTML === this.player2) {
                     variableO += 1
                     if (variableO == this.gameSize) {
                         alert('Gano el jugador ' + this.player2)
-                        this.drawGame()
+                        this.init()
                     }
                 }
                 i += -1
