@@ -3,13 +3,6 @@ class TicTacToe extends HTMLElement {
     constructor() {
         super()
         this.shadow = this.attachShadow({ mode: 'open' })
-        this.init()
-    }
-
-    connectedCallback() {
-    }
-
-    init() {
         this.gameSize = 3
         this.turn = 0
         this.player1 = null
@@ -73,14 +66,14 @@ class TicTacToe extends HTMLElement {
                     variableX += 1
                     if (variableX == this.gameSize) {
                         alert('Gano el jugador ' + this.player1)
-                        this.init()
+                        this.reloadPage()
                     }
                 }
                 if (this.arrayCase[i][j].innerHTML === this.player2) {
                     variableO += 1
                     if (variableO == this.gameSize) {
                         alert('Gano el jugador ' + this.player2)
-                        this.init()
+                        this.reloadPage()
                     }
                 }
             }
@@ -94,14 +87,14 @@ class TicTacToe extends HTMLElement {
                     variableX += 1
                     if (variableX == this.gameSize) {
                         alert('Gano el jugador ' + this.player1)
-                        this.init()
+                        this.reloadPage()
                     }
                 }
                 if (this.arrayCase[i][j].innerHTML === this.player2) {
                     variableO += 1
                     if (variableO == this.gameSize) {
                         alert('Gano el jugador ' + this.player2)
-                        this.init()
+                        this.reloadPage()
                     }
                 }
             }
@@ -115,14 +108,14 @@ class TicTacToe extends HTMLElement {
                 variableX += 1
                 if (variableX == this.gameSize) {
                     alert('Gano el jugador ' + this.player1)
-                    this.init()
+                    this.reloadPage()
                 }
             }
             if (this.arrayCase[i][i].innerHTML === this.player2) {
                 variableO += 1
                 if (variableO == this.gameSize) {
                     alert('Gano el jugador ' + this.player2)
-                    this.init()
+                    this.reloadPage()
                 }
             }
         }
@@ -137,14 +130,14 @@ class TicTacToe extends HTMLElement {
                     variableX += 1
                     if (variableX == this.gameSize) {
                         alert('Gano el jugador ' + this.player1)
-                        this.init()
+                        this.reloadPage()
                     }
                 }
                 if (this.arrayCase[i][j].innerHTML === this.player2) {
                     variableO += 1
                     if (variableO == this.gameSize) {
                         alert('Gano el jugador ' + this.player2)
-                        this.init()
+                        this.reloadPage()
                     }
                 }
                 i += -1
@@ -154,6 +147,20 @@ class TicTacToe extends HTMLElement {
             variableO = 0
         }
     }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name == 'game') {
+            console.log('value changed to: ' + newValue)
+        }
+    }
+
+    static get observedAttributes() {
+        return ['game']
+     }
+
+     reloadPage() {
+        document.location.reload(true)
+      }
 
 }
 
