@@ -2,17 +2,23 @@ class TicTacToe extends HTMLElement {
 
     constructor() {
         super()
-        this.shadow = this.attachShadow({ mode: 'open' })
+
         this.gameSize = 3
-        this.turn = 0
-        this.player1 = null
-        this.player2 = null
+        this.button = null
+        this.shadow = this.attachShadow({ mode: 'open' })
         let link = document.createElement('link')
         link.setAttribute('rel', 'stylesheet')
         link.setAttribute('type', 'text/css')
         link.setAttribute('href', './style.css')
         this.shadow.appendChild(link)
+        this.init()
         this.showPromptInit()
+    }
+
+    init() {
+        this.turn = 0
+        this.player1 = null
+        this.player2 = null
         this.drawGame()
     }
 
@@ -29,10 +35,10 @@ class TicTacToe extends HTMLElement {
         for (var i = 0; i < this.gameSize; i++) {
             this.arrayCase[i] = []
             for (var j = 0; j < this.gameSize; j++) {
-                var button = document.createElement('button')
-                this.arrayCase[i].push(button)
-                button.addEventListener('click', this.play.bind(this))
-                this.shadow.appendChild(button)
+                this.button = document.createElement('button')
+                this.arrayCase[i].push(this.button)
+                this.button.addEventListener('click', this.play.bind(this))
+                this.shadow.appendChild(this.button)
             }
             var br = document.createElement('br')
             this.shadow.appendChild(br)
@@ -150,17 +156,21 @@ class TicTacToe extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (name == 'game') {
-            console.log('value changed to: ' + newValue)
+            if (oldValue != null) {
+                console.log(oldValue + " " + newValue)
+                this.gameSize = newValue
+                this.init()
+            }
         }
     }
 
     static get observedAttributes() {
         return ['game']
-     }
+    }
 
-     reloadPage() {
+    reloadPage() {
         document.location.reload(true)
-      }
+    }
 
 }
 
